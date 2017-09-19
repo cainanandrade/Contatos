@@ -1,5 +1,6 @@
 package br.cainan.control;
 
+import br.cainan.exception.EmailInException;
 import br.cainan.model.Contato;
 import br.cainan.view.View;
 
@@ -15,8 +16,14 @@ public class Executar {
 		while(opcao != 4){
 			switch (opcao){
 			case 0:
-				agenda.adicionarContato();
-				break;
+				try {
+					agenda.adicionarContato();
+					break;
+				} catch (EmailInException c) {
+					view.exibeMsg(c.getMessage());
+					break;
+				}
+				
 				
 			case 1:
 				Contato buscaContato = agenda.buscarContato(view.recebeString("Digite o nome para buscar o contato: "));

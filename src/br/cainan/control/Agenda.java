@@ -3,6 +3,7 @@ package br.cainan.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.cainan.exception.EmailInException;
 import br.cainan.model.Contato;
 import br.cainan.view.View;
 
@@ -10,10 +11,11 @@ public class Agenda {
 	// lista onde são armazenados os contatos
 	List<Contato> agenda = new ArrayList<Contato>();
 	
-	public void adicionarContato(){
+	public void adicionarContato() throws EmailInException{
 		//método para adicionar um contato na lista
 		View view = new View();
 		Contato contato = new Contato(view.recebeString("Nome: "), view.recebeString("E-mail: "));
+		validaEmail(contato);
 		agenda.add(contato);
 		
 	}
@@ -24,7 +26,7 @@ public class Agenda {
 		
 		for (int i = 0; i < agenda.size(); i++) {
 			String nomeContato = agenda.get(i).getNome();
-			if (nomeBusca.equals(nomeContato))
+			if (nomeBusca.equalsIgnoreCase(nomeContato))
 				buscaContato = agenda.get(i);
 		}
 		
@@ -55,6 +57,19 @@ public class Agenda {
 			
 		
 		
+	}
+	
+	public Contato validaEmail (Contato contato) throws EmailInException{
+		String[] separaEmail = contato.getEmail().split("@");
+		String dominio = separaEmail[1];
+		String[] separaDom = dominio.split("\\.");
+		
+		if (separaDom[0].equalsIgnoreCase("gmail") || separaDom[0].equalsIgnoreCase("hotmail") || separaDom[0].equalsIgnoreCase("yahoo")){
+			return contato;
+		}
+		else
+			throw new EmailInException(contato);
+			
 	}
 	
 	
