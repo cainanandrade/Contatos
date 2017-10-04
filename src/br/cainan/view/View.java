@@ -14,8 +14,8 @@ public class View {
 		
 	}
 	
-	public  static Integer opcoes(String texto){
-		Object[] options = {"Adcionar", "Buscar", "Remover", "Ver contatos", "Sair"};
+	public  static Integer opcoes(String texto, Object[] options){
+		//Object[] options = {"Adcionar", "Buscar", "Remover", "Ver contatos", "Sair"};
 		Integer resposta = JOptionPane.showOptionDialog(null, texto, "MENU", JOptionPane.DEFAULT_OPTION, 
 				JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 		

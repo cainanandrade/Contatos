@@ -11,7 +11,9 @@ public class Executar {
 		
 		View view = new View();
 		
-		Integer opcao = view.opcoes("Escolha o que você deseja fazer: ");
+		Object[] options = {"Adcionar", "Buscar", "Remover", "Ver contatos", "Sair"};
+		
+		Integer opcao = view.opcoes("Escolha o que você deseja fazer: ", options);
 		
 		while(opcao != 4){
 			switch (opcao){
@@ -45,7 +47,7 @@ public class Executar {
 				System.exit(0);
 			}
 			
-			opcao = view.opcoes("Escolha o que você deseja fazer: ");
+			opcao = view.opcoes("Escolha o que você deseja fazer: ", options);
 		}			
 
 	}
